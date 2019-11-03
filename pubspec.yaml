@@ -7,12 +7,14 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  # tflite loading package
+  tflite: ^1.0.4
+
   flutter:
     sdk: flutter
 
   cupertino_icons: ^0.1.2
   image_picker: ^0.6.1+8
-  flutter_image_compress: ^0.6.3
   dots_indicator: ^1.0.0
   dotted_border: ^1.0.3
 
