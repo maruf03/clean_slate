@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:clean_slate/ui/splash_page.dart';
+import 'package:clean_slate/utils/theme.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'Clean Slate',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: themeColor,
       ),
       home: SplashPage(),
     );

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:clean_slate/ui/home_page.dart';
+import 'package:clean_slate/utils/theme.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage({Key key}) : super(key: key);
@@ -16,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
     return Timer(duration, (){
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) {
-          return HomePage();
+          return HomePage(pageIndex: 0,);
         },
       ));
     });
@@ -35,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         child: Text("Icon Here"),
       ),
-      backgroundColor: Colors.green,
+      backgroundColor: themeColor,
     );
   }
 }
