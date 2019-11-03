@@ -12,7 +12,6 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   image_picker: ^0.6.1+8
-  flutter_image_compress: ^0.6.3
   dots_indicator: ^1.0.0
   dotted_border: ^1.0.3
 
@@ -24,3 +23,14 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/images/logo.png
+
+  fonts:
+    - family: MontserratAlternates-Bold
+      fonts:
+        - asset: assets/fonts/MontserratAlternates-Bold.ttf
+    - family: MontserratAlternates-Regular
+      fonts:
+        - asset: assets/fonts/MontserratAlternates-Regular.ttf
