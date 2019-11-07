@@ -27,15 +27,6 @@ Future<List> checkImage({
   if(model == null || image == null)
     throw NullThrownError();
 
-  // FIXME: DUMMY DATA
-  return [
-    {
-      'index': 0,
-      'label': 'Normal',
-      'confidence': 0.836,
-    }
-  ];
-
   // model is stored if recognize function needs
   // it in future.
   _model = model;
@@ -54,6 +45,10 @@ Future<List> checkImage({
         'label': "normal",
         'confidence': 0.629,
       }];
+    else
+      return null;
+    // DEMO END
+
 //  // Close previous Tflite model
 //  if (Tflite != null) {
 //    Tflite.close();
