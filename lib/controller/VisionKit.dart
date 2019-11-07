@@ -15,6 +15,11 @@ String _model;
 /// image.
 /// It throws Null exception if model or
 /// image is null.
+
+Future sleep1(int time) {
+  return new Future.delayed(Duration(seconds: time), () => "1");
+}
+
 Future<List> checkImage({
   @required String model,
   @required File image,
@@ -26,36 +31,50 @@ Future<List> checkImage({
   // it in future.
   _model = model;
 
-  // Close previous Tflite model
-  if (Tflite != null) {
-    Tflite.close();
-  }
-
-  try {
-    String res;
-    switch (_model) {
-      case _xray:
-        res = await Tflite.loadModel(
-          // TODO: update model and label text names
-          model: "",
-          labels: "",
-        );
-        break;
-      case _oct:
-        res = await Tflite.loadModel(
-          // TODO: update model and label text names
-          model: "",
-          labels: "",
-        );
-        break;
-      default:
-        break;
-    }
-    print(res);
-  } on PlatformException {
-    print('Failed to load models');
-  }
-  return _recognizeImage(image);
+  // DEMO START
+    sleep1(10);
+    if(model == 'xray')
+      return [{
+        'index': 1,
+        'label': "pneumania",
+        'confidence': 0.879,
+      }];
+    else if(model == 'oct')
+      return [{
+        'index': 0,
+        'label': "normal",
+        'confidence': 0.629,
+      }];
+//  // Close previous Tflite model
+//  if (Tflite != null) {
+//    Tflite.close();
+//  }
+//
+//  try {
+//    String res;
+//    switch (_model) {
+//      case _xray:
+//        res = await Tflite.loadModel(
+//          // TODO: update model and label text names
+//          model: "",
+//          labels: "",
+//        );
+//        break;
+//      case _oct:
+//        res = await Tflite.loadModel(
+//          // TODO: update model and label text names
+//          model: "",
+//          labels: "",
+//        );
+//        break;
+//      default:
+//        break;
+//    }
+//    print(res);
+//  } on PlatformException {
+//    print('Failed to load models');
+//  }
+//  return _recognizeImage(image);
 }
 
 /// Model is run on an image and returns the
