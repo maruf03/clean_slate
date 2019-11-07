@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
       children: <Widget>[
         IconButton(
           padding: EdgeInsets.all(0.0),
-          icon: Icon(Icons.camera, color: Colors.white, size: 64,),
+          icon: Icon(Icons.camera_alt, color: Colors.white, size: 64, ),
           onPressed: () async {
             var image = await ImagePicker.pickImage(source: ImageSource.camera);
             setState(() {
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
 //        SizedBox(width: 56),
         IconButton(
           padding: EdgeInsets.all(0.0),
-          icon: Icon(Icons.sd_card, color: Colors.white, size: 64,),
+          icon: Icon(Icons.image, color: Colors.white, size: 64,),
           onPressed: () async {
             var image = await ImagePicker.pickImage(source: ImageSource.gallery);
             setState(() {
