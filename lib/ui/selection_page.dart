@@ -108,7 +108,7 @@ class _SelectionPageState extends State<SelectionPage> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                            var page = (modelOne) ? LoadingPage(symptomImage: widget.symptomImage, model: 1) : LoadingPage(symptomImage: widget.symptomImage, model: 2);
+                            var page = (modelOne) ? LoadingPage(symptomImage: widget.symptomImage, model: 0) : LoadingPage(symptomImage: widget.symptomImage, model: 1);
                             return page;
                           },
                         ),

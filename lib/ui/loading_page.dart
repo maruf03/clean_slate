@@ -18,11 +18,25 @@ class LoadingPage extends StatefulWidget {
 }
 
 class _LoadingPageState extends State<LoadingPage> {
+  Future<List<Map<String, dynamic>>> _result;
 
-//  Future<List<dynamic>> _getResult() async {
-//    var result = await checkImage(model: widget.models[widget.model], image: widget.symptomImage);
-//    return result;
-//  }
+  _getResult() {
+    _result = checkImage(model: widget.models[widget.model], image: widget.symptomImage);
+    _result.then((value){
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context){
+          return ResultPage(result: value, pageIndex: 2,);
+        },
+      ));
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _getResult();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,36 +49,5 @@ class _LoadingPageState extends State<LoadingPage> {
               ),
               backgroundColor: CustomTheme.themeColor,
             );
-//    return FutureBuilder<List>(
-//      future: _getResult(),
-//      builder: (context, snapshot) {
-//        switch(snapshot.connectionState) {
-//          case ConnectionState.none:
-//          case ConnectionState.active:
-//          case ConnectionState.waiting:
-//            return Scaffold(
-//              body: Center(
-//                child: SpinKitWanderingCubes(
-//                  color: Colors.white30,
-//                  size: 75.0,
-//                  duration: Duration(milliseconds: 1800),
-//                ),
-//              ),
-//              backgroundColor: CustomTheme.themeColor,
-//            );
-//          case ConnectionState.done:
-//            if(snapshot.hasError) {
-//              return Scaffold(
-//                body: Center(
-//                  child: Text("There has been an internal error.", style: TextStyle(color: Colors.red),),
-//                ),
-//                backgroundColor: CustomTheme.themeColor,
-//              );
-//            } else {
-//              return ResultPage();
-//            }
-//        }
-//      },
-//    );
   }
 }

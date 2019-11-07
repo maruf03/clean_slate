@@ -20,7 +20,7 @@ Future sleep1(int time) {
   return new Future.delayed(Duration(seconds: time), () => "1");
 }
 
-Future<List> checkImage({
+Future<List<Map<String, dynamic>>> checkImage({
   @required String model,
   @required File image,
   }) async {
@@ -32,7 +32,7 @@ Future<List> checkImage({
   _model = model;
 
   // DEMO START
-    sleep1(10);
+    await sleep1(10);
     if(model == 'xray')
       return [{
         'index': 1,
