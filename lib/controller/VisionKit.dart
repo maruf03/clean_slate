@@ -45,6 +45,8 @@ Future<List> checkImage({
         'label': "normal",
         'confidence': 0.629,
       }];
+    // DEMO END
+
 //  // Close previous Tflite model
 //  if (Tflite != null) {
 //    Tflite.close();
