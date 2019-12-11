@@ -24,6 +24,7 @@ Future sleep1(int time) {
   @required String model,
   @required File image,
   }) async {
+  Tflite.close();
   if(model == null || image == null)
     throw NullThrownError();
 
@@ -80,15 +81,18 @@ Future sleep1(int time) {
     print('Failed to load models');
   }
   var val = await _recognizeImage(image);
-  print(val);
-  Tflite.close();
-  return val;
+  List<Map<String, dynamic>> mapList = [];
+  val.forEach((f){
+    mapList.add(Map<String, dynamic>.from(f));
+  });
+  print(mapList);
+  return mapList;
 }
 
 /// Model is run on an image and returns the
 /// result list from the function.
 /// It is currently set to return one result.
-Future _recognizeImage(File image) async {
+Future<List<dynamic>> _recognizeImage(File image) async {
   List recognition = await Tflite.runModelOnImage(
     path: image.path,
     numResults: 1,
