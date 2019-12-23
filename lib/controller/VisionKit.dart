@@ -68,11 +68,13 @@ Future sleep1(int time) {
         break;
       case _oct:
         {
+          print('oct load entered');
           res = await Tflite.loadModel(
             // TODO: update model and label text names
-            model: "",
-            labels: "",
+            model: "assets/models/oct_bayesian_best.tflite",
+            labels: "assets/models/oct_bayesian_best.txt",
           );
+          print('oct load exited');
         }
         break;
     }

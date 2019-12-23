@@ -39,6 +39,8 @@ flutter:
     - assets/images/logo.png
     - assets/models/xray_pneumonia.tflite
     - assets/models/xray_pneumonia.txt
+    - assets/models/oct_bayesian_best.tflite
+    - assets/models/oct_bayesian_best.txt
 
   fonts:
     - family: MontserratAlternates-Bold
