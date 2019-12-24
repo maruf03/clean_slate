@@ -19,13 +19,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   File _image;
-
+  MediaQueryData _mediaQueryData;
+  double _screenWidth;
+  double _screenHeight;
+  bool hiResMode = false;
+  @override
+  void initState() {
+    super.initState();
+  }
   Widget _getImageStack() {
     return Stack(
 
       alignment: Alignment.center,
       children: <Widget>[
-        Image.file(_image, height: 512, width: 256,),
+        Image.file(_image, height: (hiResMode)? 512 : 320, width: (hiResMode)? 320 : 256,), // 256x512
         Padding(
           padding: EdgeInsets.only(bottom: 16),
           child: Align(
@@ -69,6 +76,12 @@ class _HomePageState extends State<HomePage> {
   
   @override
   Widget build(BuildContext context) {
+    _mediaQueryData = MediaQuery.of(context);
+    _screenWidth = _mediaQueryData.size.width;
+    _screenHeight = _mediaQueryData.size.height;
+    print('Resolution: $_screenWidth x $_screenHeight');
+    hiResMode = _screenWidth >= 480 && _screenHeight >= 992;
+    print(hiResMode);
     return Scaffold(
       body: Center(
         child: Stack(
@@ -83,8 +96,8 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 320,
-                    width: 256,
+                    height: (hiResMode)? 512 : 320, //320 default
+                    width: (hiResMode)? 320 : 256, //256 default
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                         color: CustomTheme.themeColor,

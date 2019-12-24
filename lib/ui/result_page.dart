@@ -28,14 +28,15 @@ class _ResultPageState extends State<ResultPage> {
               Positioned(
                 top: 110,
                 child: CircularPercentIndicator(
-                  radius: 100.0,
+                  radius: 160,
+                  lineWidth: 12.5,
                   animation: true,
                   animationDuration: 1200,
                   percent: double.parse(widget.result[0]['confidence'].toString()),
                   backgroundColor: CustomTheme.themeColor.shade300,
                   progressColor: CustomTheme.themeColor.shade700,
                   center: Text("${double.parse(widget.result[0]['confidence'].toString())*100}", style: TextStyle(fontFamily: 'MontserratAlternates-Bold', color: CustomTheme.themeColor, fontSize: 18)),
-                  footer: Text("${widget.result[0]['label']}", style: TextStyle(fontFamily: 'MontserratAlternates-Bold', color: CustomTheme.themeColor, fontSize: 18)),
+                  footer: Text("${widget.result[0]['label']}", style: TextStyle(fontFamily: 'MontserratAlternates-Bold', color: CustomTheme.themeColor, fontSize: 24)),
                 ),
               ),
               Positioned(
