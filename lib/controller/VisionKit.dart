@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
 
 // TODO: update string according to model name
-const String _xray = "";
-const String _oct = "";
+const String _xray = "xray";
+const String _oct = "oct";
 String _model;
 
 /// This is function is called with the model
@@ -15,65 +15,90 @@ String _model;
 /// image.
 /// It throws Null exception if model or
 /// image is null.
-Future<List> checkImage({
+
+Future sleep1(int time) {
+  return new Future.delayed(Duration(seconds: time), () => "1");
+}
+
+ Future<List<Map<String, dynamic>>> checkImage({
   @required String model,
   @required File image,
   }) async {
+  Tflite.close();
   if(model == null || image == null)
     throw NullThrownError();
-
-  // FIXME: DUMMY DATA
-  return [
-    {
-      'index': 0,
-      'label': 'Normal',
-      'confidence': 0.836,
-    }
-  ];
 
   // model is stored if recognize function needs
   // it in future.
   _model = model;
 
+  // DEMO START
+//    await sleep1(4);
+//    if(model == _xray)
+//      return [{
+//        'index': 1,
+//        'label': "pneumania",
+//        'confidence': 0.879,
+//      }];
+//    else if(model == _oct)
+//      return [{
+//        'index': 0,
+//        'label': "normal",
+//        'confidence': 0.629,
+//      }];
+//    else
+//      return null;
+    // DEMO END
+
   // Close previous Tflite model
-  if (Tflite != null) {
-    Tflite.close();
-  }
 
   try {
     String res;
     switch (_model) {
       case _xray:
-        res = await Tflite.loadModel(
-          // TODO: update model and label text names
-          model: "",
-          labels: "",
-        );
+        {
+          print('xray load entered');
+          res = await Tflite.loadModel(
+            // TODO: update model and label text names
+            model: "assets/models/xray_pneumonia.tflite",
+            labels: "assets/models/xray_pneumonia.txt",
+          );
+          print('xray load exited');
+        }
         break;
       case _oct:
-        res = await Tflite.loadModel(
-          // TODO: update model and label text names
-          model: "",
-          labels: "",
-        );
-        break;
-      default:
+        {
+          print('oct load entered');
+          res = await Tflite.loadModel(
+            // TODO: update model and label text names
+            model: "assets/models/oct_bayesian_best.tflite",
+            labels: "assets/models/oct_bayesian_best.txt",
+          );
+          print('oct load exited');
+        }
         break;
     }
     print(res);
   } on PlatformException {
     print('Failed to load models');
   }
-  return _recognizeImage(image);
+  var val = await _recognizeImage(image);
+  List<Map<String, dynamic>> mapList = [];
+  val.forEach((f){
+    mapList.add(Map<String, dynamic>.from(f));
+  });
+  print(mapList);
+  return mapList;
 }
 
 /// Model is run on an image and returns the
 /// result list from the function.
 /// It is currently set to return one result.
-Future<List> _recognizeImage(File image) async {
+Future<List<dynamic>> _recognizeImage(File image) async {
   List recognition = await Tflite.runModelOnImage(
     path: image.path,
     numResults: 1,
   );
+  print(recognition);
   return recognition;
 }
